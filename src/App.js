@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import UserItem from "./components/UserItem"
+import {connect} from 'react-redux';
 
 class App extends React.Component {
   constructor(props) {
@@ -55,13 +56,23 @@ class App extends React.Component {
 
         {/* List of users */}
         <div>
-          {this.state.users.map((user, index) => (
-          <UserItem key={index} name={user.name} email={user.email}/>
-          ))}
+          {this.props.users.map((user, index) => {
+            return (
+              <UserItem
+                key={index}
+                name={user.name}
+                email={user.email}
+              />
+            );
+          })}
         </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  users:state.users  
+})
+
+export default connect (mapStateToProps) (App);

@@ -1,5 +1,5 @@
 const initialState = {
-    users=[
+    users: [
         {
         name:"Nicki Kay",
         email: "nickynic@gmail.com",
@@ -22,8 +22,8 @@ const usersReducer = (state= initialState, action) => {
     switch (action.type) {
         case 'ADD_USER':
             let newUser={
-                name:this.state.name, 
-                email:this.state.email, 
+                name:action.payload.name, 
+                email:action.payload.email, 
             };
             return {...state, users: [...state.users, newUser]};    
         default:
