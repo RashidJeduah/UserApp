@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import UserItem from "./components/UserItem"
 import {connect} from 'react-redux';
+import { addUser } from "./Store/userActions";
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +34,10 @@ class App extends React.Component {
     let newUser={name:this.state.name, email:this.state.email };
     this.setState({users: [...this.state.users, newUser] });
   }
+
+  addNewUser = newUser => {
+    this.props.addUser(newUser)
+  } 
 
   render() {
     return (
@@ -73,6 +78,10 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   users:state.users  
-})
+});
 
-export default connect (mapStateToProps) (App);
+const mapDispatchToProps = {
+  addUser: addUser
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (App);
