@@ -2,7 +2,8 @@ import React from "react";
 import "./App.css";
 import UserItem from "./components/UserItem"
 import {connect} from 'react-redux';
-import { addUser } from "./Store/userActions";
+import { addUser, deleteUser } from "./Store/userActions";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -39,6 +40,9 @@ class App extends React.Component {
     this.props.addUser(newUser)
   } 
 
+  deleteUser = user_id =>
+  this.props.deleteUser(user_id) 
+
   render() {
     return (
       <div className="App">
@@ -55,18 +59,20 @@ class App extends React.Component {
             onChange={this.handleEmailChange}
             />
             <br />
-            <input type="submit" />
+            <button type='submit'>Add user</button>
           </form>
         </div>
 
         {/* List of users */}
         <div>
-          {this.props.users.map((user, index) => {
+          {this.props.users.map((user) => {
             return (
               <UserItem
-                key={index}
+                key={user.id}
+                id= {user.id}
                 name={user.name}
                 email={user.email}
+                removeUser ={this.deleteUser}
               />
             );
           })}
@@ -81,7 +87,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  addUser: addUser
+  addUser: addUser,
+  deleteUser: deleteUser
 }
 
 export default connect (mapStateToProps, mapDispatchToProps) (App);

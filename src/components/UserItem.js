@@ -1,10 +1,17 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 
-const UserItem = ({name, email}) => {
+const UserItem = ({name, email, id, removeUser}) => {
+  const handleClick = () => {
+    removeUser(id)
+  }
   return (
     <div>
       <h1>Name: {name}</h1>
       <h3>Email: {email}</h3>
+      <button onClick={handleClick}>Remove user</button>
+      <Link to={`/edit/${id}`}>Edit user</Link>
+      <hr/>
     </div>
   );
 };
