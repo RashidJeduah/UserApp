@@ -12,7 +12,6 @@ class App extends React.Component {
     this.state = {
       name: "",
       email: "",
-      users:[],
     };
 
     this.handleNameChange= this.handleNameChange.bind(this);
@@ -32,13 +31,12 @@ class App extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
+    console.log("submit",this.state );
     let newUser={name:this.state.name, email:this.state.email };
-    this.setState({users: [...this.state.users, newUser] });
-  }
-
-  addNewUser = newUser => {
     this.props.addUser(newUser)
-  } 
+    // this.setState({users: [...this.state.users, newUser] });
+  }
+ 
 
   deleteUser = user_id =>
   this.props.deleteUser(user_id) 
