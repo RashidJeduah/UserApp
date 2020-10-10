@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import UserItem from "./components/UserItem"
 import {connect} from 'react-redux';
-import { addUser, deleteUser } from "./Store/userActions";
+import { addUser, deleteUser, getAllUsers } from "./Store/userActions";
 
 
 class App extends React.Component {
@@ -27,7 +27,7 @@ class App extends React.Component {
   handleEmailChange(e){
     this.setState({email: e.target.value});
     console.log(this.state.email)
-  }
+  };
 
   handleSubmit(e){
     e.preventDefault();
@@ -35,11 +35,14 @@ class App extends React.Component {
     let newUser={name:this.state.name, email:this.state.email };
     this.props.addUser(newUser)
     // this.setState({users: [...this.state.users, newUser] });
-  }
- 
+  };
+
+  componentDidMount() {
+    this.props.getAllUsers();
+  } 
 
   deleteUser = user_id =>
-  this.props.deleteUser(user_id) 
+  this.props.deleteUser(user_id); 
 
   render() {
     return (
@@ -86,7 +89,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addUser: addUser,
-  deleteUser: deleteUser
+  deleteUser: deleteUser,
+  getAllUsers: getAllUsers
 }
 
 export default connect (mapStateToProps, mapDispatchToProps) (App);

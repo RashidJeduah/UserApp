@@ -36,14 +36,16 @@ const usersReducer = (state = initialState, action) => {
             const filteredUsers = state.users.filter(user => user.id !== action.payload)
             return { ...state, users: filteredUsers }
         case "EDIT_USER":
-            const updatedUserInfo = state.users.map (user => {
-                if (user.id === action.user.id){
-                    return {...user, ...action.updated_info}
+            const updatedUserInfo = state.users.map(user => {
+                if (user.id === action.user.id) {
+                    return { ...user, ...action.updated_info }
                 } else {
                     return user;
                 }
             });
-            return {...state, users: updatedUserInfo}
+            return { ...state, users: updatedUserInfo }
+        case 'SET_ALL_USERS':
+            return { users: action.payload };
         default:
             return state;
     }
