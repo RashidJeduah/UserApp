@@ -48,6 +48,10 @@ class App extends React.Component {
     return (
       <div className="App">
         {/* Form to add new user */}
+
+        <button>Logout</button>
+        <hr/>
+
         <div>
           <form onSubmit={this.handleSubmit}>
             <input type="text" placeholder="Name" 
@@ -83,9 +87,12 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  users:state.users  
-});
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+  users:state.usersState.users,  
+  };
+};
 
 const mapDispatchToProps = {
   addUser: addUser,
